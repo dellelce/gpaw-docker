@@ -59,9 +59,9 @@ decho()
 
 id="lapack"
 projectdir="${GPAW}"
-src="${projectdir}/libs/${id}"
+src="${projectdir}/source/${id}"
 target="${projectdir}/build/${id}"
-install="${projectdir}/local_install"
+installtmp="${projectdir}/software"
 
 ### MAIN ###
 

@@ -20,7 +20,12 @@ ARG PACKAGES
 ENV PACKAGES gcc bash ncurses ncurses-libs wget perl file xz make libc-dev linux-headers g++
 
 WORKDIR $BUILDDIR
-COPY . $BUILDDIR
+COPY *.sh $BUILDDIR
+
+COPY automake $INSTALLDIR/source/automake
+COPY blas $INSTALLDIR/source/blas
+COPY lapack $INSTALLDIR/source/lapack
+COPY libxc $INSTALLDIR/source/libxc
 
 RUN  apk add --no-cache  $PACKAGES &&  \
      bash ${BUILDDIR}/docker.sh $INSTALLDIR

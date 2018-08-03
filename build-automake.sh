@@ -11,9 +11,9 @@
 
 id="automake"
 projectdir="${GPAW}"
-src="${projectdir}/libs/${id}"
+src="${projectdir}/source/${id}"
 target="${projectdir}/build/${id}"
-installtmp="${projectdir}/local_install"
+installtmp="${projectdir}/software"
 
 ### MAIN ###
 
