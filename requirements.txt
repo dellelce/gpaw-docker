@@ -1,0 +1,7 @@
+ase
+numpy
+gpaw
+celery
+spglib
+setproctitle
+elastic
