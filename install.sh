@@ -51,7 +51,7 @@ libxc_test()
  typeset _l="$GPAW/local_install"
  typeset uninstalled=0
 
- [ ! -f "$_l/include/xc.h" -o ! -f "$_l/lib/libxc.a" ] && uninstalled=1 
+ [ ! -f "$_l/include/xc.h" -o ! -f "$_l/lib/libxc.a" ] && uninstalled=1
 
  [ "$uninstalled" -ne 0 ] && { echo "building and installing libxc"; libxc_install; return $?; }
 
@@ -100,7 +100,7 @@ lapack_test()
  do
   fp="${_l}/${lib}"
 
-  [ ! -f "$fp" ] && { uninstalled=1; break; } 
+  [ ! -f "$fp" ] && { uninstalled=1; break; }
  done
 
  [ "$uninstalled" -eq 1 ] &&
@@ -118,10 +118,17 @@ lapack_test()
  export GPAW="$1"
  [ -z "$GPAW" ] && { echo "usage: $0 instal path";  exit 1; }
 
- export workDir="$GPAW/local_install"
+ export workDir="$GPAW/software"
  export PATH="$workDir/bin:$PATH"
+ export virtualenv="$GPAW/venv"
+ export activate="$virtualenv/bin/activate"
 
 ### MAIN ###
+
+ python3 -m venv $virtualenv || { echo "Python virtualenv creation failed!"; exit 1; }
+ [ ! -f "$activate" ] && { echo "virtualenv activate does not exist!"; exit 1; }
+
+ . "$activate"
 
 # test if libxc is installed if not build/install
 
