@@ -1,0 +1,107 @@
+#!/bin/bash
+#
+# File:         build-blas.sh
+# Created:      220215
+# Description:  build blas
+#
+
+### FUNCTIONS ###
+
+#
+# custom basename
+
+_basename()
+{
+ typeset root="$1"
+
+ awk -vroot=$root '
+ {
+  rootlen = length(root)
+  base = substr($0, rootlen + 2, length($0) - rootlen)
+
+  if (length(base) != 0) { print base; }
+ }
+'
+}
+ 
+
+_bulk_ln()
+{
+ typeset root="$1" 
+ typeset target="$2" 
+
+ awk -vroot=$root -vtarget=$target \
+'
+ BEGIN { cnt = 0; }
+ {
+  rootlen = length(root)
+  base = substr($0, rootlen + 2, length($0) - rootlen)
+
+  if (length(base) != 0)
+  {
+   print "ln -sf " $0 " "target "/" base " &&";
+   cnt = cnt + 1;
+
+   if (cnt % 100 == 0) { print "echo success for " cnt; }
+  }
+ }
+ END \
+ {
+  print " echo Complete: for " cnt " links";
+ }
+'
+}
+
+### ENV ###
+
+id="blas"
+projectdir="${GPAW}"
+src="${projectdir}/libs/${id}"
+target="${projectdir}/build/${id}"
+install="${projectdir}/local_install"
+
+### MAIN ###
+
+# Sanity checks
+
+[ ! -d "${projectdir}" ] && { echo "Project directory invalid"; exit 1; }
+[ ! -d "${src}" ] && { echo "Source directory invalid"; exit 1; }
+[ ! -d "${target}" ] && { mkdir -p "${target}" || exit 1; }
+
+# Actual main
+# Make links for files and re-create directories in build directory
+
+allDirs=$(find $src  -type d | _basename ${src} )
+
+cd ${target} || { echo "Failed changing directory to target: ${target}"; return 1; }
+
+# Blas does not have dirs (...for now...)
+[ ! -z "${allDirs}" ] && mkdir -p ${allDirs}
+
+find $src -type f | awk '!/\.git/&&!/\.out$/&&!/\.o$/&&!/\.a$/' | _bulk_ln $src $target | sh
+rc=$?
+
+[ $rc -ne 0 ] && { echo "failed creating links"; exit 1; }
+
+#
+echo "Starting at :"$(date)
+
+# Make it
+make
+rc=$?
+[ $rc -eq 0 ] &&
+{
+ liba="blas_LINUX.a"
+ libso="libblas.so"
+
+ # blas Makefile does not have an install
+
+ cp $liba "$install/lib" || exit $?
+ cp $libso "$install/lib" || exit $?
+ ln -sf "$install/lib/${liba}" "$install/lib/blas.a" || exit $?
+ ln -sf "$install/lib/${liba}" "$install/lib/libblas.a" || exit $?
+}
+
+exit $rc
+
+### EOF ###
