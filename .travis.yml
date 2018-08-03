@@ -1,0 +1,6 @@
+language: c
+notifications:
+   slack: skydreams:1FLUnEeqaNLinKq1p0lJf9F5
+services:
+ - docker
+script: ./docker.sh /app/gpaw
