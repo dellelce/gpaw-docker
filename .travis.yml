@@ -5,3 +5,5 @@ sudo: required
 services:
  - docker
 script: docker build .
+addons:
+  ssh_known_hosts: antouk.bitbucket.org
