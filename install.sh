@@ -118,6 +118,10 @@ lapack_test()
  export GPAW="$1"
  [ -z "$GPAW" ] && { echo "usage: $0 instal path";  exit 1; }
 
+ # this is temporary... for real!
+ mkdir -p $GPAW/sh
+ cp *.sh $GPAW/sh
+
  export workDir="$GPAW/software"
  export PATH="$workDir/bin:$PATH"
  export virtualenv="$GPAW/venv"
