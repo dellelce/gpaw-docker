@@ -135,6 +135,7 @@ lapack_test()
  [ ! -f "$activate" ] && { echo "virtualenv activate does not exist!"; exit 1; }
 
  . "$activate"
+ pip install -U pip setuptools
 
 # test if libxc is installed if not build/install
 
