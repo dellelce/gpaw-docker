@@ -123,6 +123,8 @@ lapack_test()
  cp *.sh $GPAW/sh
 
  export workDir="$GPAW/software"
+ mkdir -p "$workDir"
+
  export PATH="$workDir/bin:$PATH"
  export virtualenv="$GPAW/venv"
  export activate="$virtualenv/bin/activate"

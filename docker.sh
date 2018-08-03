@@ -46,7 +46,7 @@ test_dir()
 
 set -x
 prefix="$1"
-./install.sh $prefix
+sudo ./install.sh $prefix
 rc=$?
 
 echo "mkit rc: $rc"
