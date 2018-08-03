@@ -1,12 +1,12 @@
-FROM alpine:latest as build
+FROM python:3.7-alpine as build
 
 MAINTAINER Antonio Dell'Elce
 
 ARG BUILDDIR
-ENV BUILDDIR  /app-build
+ENV BUILDDIR  /app/gpaw/build
 
 ARG INSTALLDIR
-ENV INSTALLDIR  /app/httpd
+ENV INSTALLDIR  /app/gpaw
 
 # gcc             most of the source needs gcc
 # bash            busybox does not support some needed features of bash like "typeset"
@@ -25,11 +25,12 @@ COPY . $BUILDDIR
 RUN  apk add --no-cache  $PACKAGES &&  \
      bash ${BUILDDIR}/docker.sh $INSTALLDIR
 
-# Second Stage
-FROM alpine:latest AS final
+# Second Stage -- second stage comes later
 
-RUN mkdir -p ${INSTALLDIR} && \
-    apk add --no-cache libgcc ncurses-libs
+#FROM alpine:latest AS final
 
-WORKDIR ${INSTALLDIR}
-COPY --from=build ${INSTALLDIR} .
+#RUN mkdir -p ${INSTALLDIR} && \
+#    apk add --no-cache libgcc ncurses-libs
+#
+#WORKDIR ${INSTALLDIR}
+##COPY --from=build ${INSTALLDIR} .
