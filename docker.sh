@@ -44,6 +44,7 @@ test_dir()
 
 ### MAIN ###
 
+set -x
 prefix="$1"
 mkdir -p $prefix && ./install.sh $prefix
 rc=$?
