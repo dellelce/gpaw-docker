@@ -46,9 +46,11 @@ test_dir()
 
 set -x
 prefix="$1"
-sudo ./install.sh $prefix
+mkdir -p $prefix && ./install.sh $prefix
 rc=$?
 
-echo "mkit rc: $rc"
+[ "$rc" -eq 0 ] && echo "mkit failed rc: $rc"
+
+exit $rc
 
 ### EOF ###
