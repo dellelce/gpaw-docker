@@ -4,4 +4,4 @@ notifications:
 sudo: required
 services:
  - docker
-script:  apt-get install python3-venv && ./docker.sh /app/gpaw
+script: docker build .
