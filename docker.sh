@@ -46,7 +46,7 @@ test_dir()
 
 set -x
 prefix="$1"
-mkdir -p $prefix && ./install.sh $prefix
+./install.sh $prefix
 rc=$?
 
 echo "mkit rc: $rc"
