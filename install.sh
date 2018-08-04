@@ -28,12 +28,6 @@
 #local_install/lib/pkgconfig
 #local_install/lib/pkgconfig/libxc.pc
 
-automake_install()
-{
- $GPAW/sh/build-automake.sh
- return $?
-}
-
 libxc_install()
 {
  $GPAW/sh/build-libxc.sh
@@ -48,7 +42,7 @@ blas_install()
 
 libxc_test()
 {
- typeset _l="$GPAW/local_install"
+ typeset _l="$GPAW/software"
  typeset uninstalled=0
 
  [ ! -f "$_l/include/xc.h" -o ! -f "$_l/lib/libxc.a" ] && uninstalled=1
@@ -59,22 +53,9 @@ libxc_test()
  return 0
 }
 
-automake_test()
-{
- typeset _l="$GPAW/local_install"
- typeset uninstalled=0
-
- [ ! -f "$_l/bin/aclocal" ] && uninstalled=1
-
- [ "$uninstalled" -eq 1 ] && { automake_install; return $?; }
-
- echo "automake already installed."
- return 0
-}
-
 blas_test()
 {
- typeset _l="$GPAW/local_install"
+ typeset _l="$GPAW/software"
  typeset uninstalled=0
 
  [ ! -f "$_l/lib/libblas.so" ] && uninstalled=1
