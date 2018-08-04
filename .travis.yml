@@ -4,6 +4,6 @@ notifications:
 sudo: required
 services:
  - docker
-script: ./getcomponents.sh && ls -lt && docker build .
+script: ./getcomponents.sh && docker build .
 addons:
   ssh_known_hosts: antouk.bitbucket.org
