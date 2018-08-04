@@ -22,6 +22,7 @@ ENV PACKAGES gcc bash ncurses ncurses-libs wget perl file xz make libc-dev linux
 WORKDIR $BUILDDIR
 COPY *.sh $BUILDDIR
 
+RUN getcomponents.sh
 COPY automake $INSTALLDIR/source/automake
 COPY blas $INSTALLDIR/source/blas
 COPY lapack $INSTALLDIR/source/lapack

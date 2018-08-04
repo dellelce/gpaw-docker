@@ -1,1 +1,7 @@
 tmp
+*.bz2
+*.gz
+automake/
+blass/
+lapack/
+libxc/
