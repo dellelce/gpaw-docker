@@ -22,7 +22,6 @@ ENV PACKAGES gcc bash ncurses ncurses-libs autoconf automake wget perl file xz m
 WORKDIR $BUILDDIR
 COPY *.sh $BUILDDIR
 
-COPY automake $INSTALLDIR/source/automake
 COPY blas $INSTALLDIR/source/blas
 COPY lapack $INSTALLDIR/source/lapack
 COPY libxc $INSTALLDIR/source/libxc
