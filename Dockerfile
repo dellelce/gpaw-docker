@@ -17,7 +17,7 @@ ENV INSTALLDIR  /app/gpaw/
 # libc-dev        headers
 # linux-headers   more headers
 ARG PACKAGES
-ENV PACKAGES gcc bash ncurses ncurses-libs autoconf wget perl file xz make libc-dev linux-headers g++
+ENV PACKAGES gcc bash ncurses ncurses-libs autoconf automake wget perl file xz make libc-dev linux-headers g++
 
 WORKDIR $BUILDDIR
 COPY *.sh $BUILDDIR
