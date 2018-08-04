@@ -3,10 +3,10 @@ FROM python:3.7-alpine as build
 MAINTAINER Antonio Dell'Elce
 
 ARG BUILDDIR
-ENV BUILDDIR  /app/gpaw/build
+ENV BUILDDIR  /app/gpaw/build/
 
 ARG INSTALLDIR
-ENV INSTALLDIR  /app/gpaw
+ENV INSTALLDIR  /app/gpaw/
 
 # gcc             most of the source needs gcc
 # bash            busybox does not support some needed features of bash like "typeset"
