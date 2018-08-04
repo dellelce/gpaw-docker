@@ -139,7 +139,6 @@ lapack_test()
 
 # test if libxc is installed if not build/install
 
- automake_test || exit $?
  blas_test || exit $?
  lapack_test || exit $?
  libxc_test || exit $?
