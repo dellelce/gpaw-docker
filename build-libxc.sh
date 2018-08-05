@@ -40,4 +40,6 @@ make install
 rc="$?"
 [ "$rc" -ne 0 ] && { echo "Make install step failed with return code ${rc}"; exit ${rc}; }
 
+exit 0
+
 ### EOF ###
