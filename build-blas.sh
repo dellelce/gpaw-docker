@@ -96,7 +96,7 @@ rc=$?
  # blas Makefile does not have an install
 
  cp $liba "$install/lib" || { echo "Failed copying $liba"; exit $?; }
- cp $libso "$install/lib" || exit $?
+ cp $libso "$install/lib" || { echo "Failed copying ${libso}"; exit $?; }
  ln -sf "$install/lib/${liba}" "$install/lib/blas.a" || exit $?
  ln -sf "$install/lib/${liba}" "$install/lib/libblas.a" || exit $?
 }

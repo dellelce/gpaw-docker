@@ -83,6 +83,9 @@ lapack_test()
 
  export workDir="$GPAW/software"
  mkdir -p "$workDir"
+ mkdir -p "$workDir/lib"
+ mkdir -p "$workDir/bin"
+ mkdir -p "$workDir/include"
 
  export PATH="$workDir/bin:$PATH"
  export virtualenv="$GPAW/venv"
