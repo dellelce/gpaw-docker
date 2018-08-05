@@ -55,6 +55,7 @@ projectdir="${GPAW}"
 src="${projectdir}/source/${id}"
 target="${projectdir}/build/${id}"
 install="${projectdir}/software"
+build_id="blas.${RANDOM}"
 
 ### MAIN ###
 
@@ -83,7 +84,8 @@ rc=$?
 echo "Starting at :"$(date)
 
 # Make it
-make
+log="/tmp/make.${build_id}.log"
+make > ${log} 2>&1
 rc=$?
 [ $rc -eq 0 ] &&
 {
@@ -99,7 +101,14 @@ rc=$?
  cp $libso "$install/lib" || { echo "Failed copying ${libso}"; exit $?; }
  ln -sf "$install/lib/${liba}" "$install/lib/blas.a" || exit $?
  ln -sf "$install/lib/${liba}" "$install/lib/libblas.a" || exit $?
+} ||
+{
+ # show log only on failure!
+ cat "${log}"
 }
+
+rm -f "${log}"
+ls -lt $install/lib
 
 exit $rc
 

@@ -12,6 +12,7 @@ projectdir="${GPAW}"
 src="${projectdir}/source/${id}"
 target="${projectdir}/build/${id}"
 install="${projectdir}/software"
+build_id="libxc.${RANDOM}"
 
 ### MAIN ###
 
@@ -26,19 +27,40 @@ install="${projectdir}/software"
 cd ${target} || { echo "Failed changing directory to target: ${target}"; exit 1; }
 
 # Step 1: Configure
-${src}/configure --enable-shared --prefix="${install}"
+log="configure.${build_id}.log"
+${src}/configure --enable-shared --prefix="${install}" > ${log} 2>&1
 rc="$?"
-[ "$rc" -ne 0 ] && { echo "Configure step failed with return code ${rc}"; exit ${rc}; }
+[ "$rc" -ne 0 ] &&
+{
+ cat "${log}"
+ rn -f "${log}"
+ echo "Configure step failed with return code ${rc}"
+ exit ${rc}
+}
 
 # Step 2: Make
-make
+log="make.${build_id}.log"
+make > ${log} 2>&1
 rc="$?"
-[ "$rc" -ne 0 ] && { echo "Make step failed with return code ${rc}"; exit ${rc}; }
+[ "$rc" -ne 0 ] &&
+{
+ cat "${log}"
+ rn -f "${log}"
+ echo "Make step failed with return code ${rc}"
+ exit ${rc}
+}
 
 # Step 3: Make Install
-make install
+log="makeinstall.${build_id}.log"
+make install > ${log} 2>&1
 rc="$?"
-[ "$rc" -ne 0 ] && { echo "Make install step failed with return code ${rc}"; exit ${rc}; }
+[ "$rc" -ne 0 ] &&
+{
+ cat "${log}"
+ rn -f "${log}"
+ echo "Make install step failed with return code ${rc}"
+ exit ${rc}
+}
 
 exit 0
 

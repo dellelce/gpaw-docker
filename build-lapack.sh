@@ -88,14 +88,14 @@ pwd
 
 ln -sf make.inc.example make.inc
 
-ls -lt Makefile.orig
+[ -f "Makefile.orig" ] && ls -lt Makefile.orig
 ls -lt Makefile
 
 echo "Starting at :"$(date)
 
-# blaslib not built automatically by make: WHY!?
-# lapack_install lib
-make blaslib && make lapack_install lib
+make blaslib
+rc_blasslib=$?
+make lapack_install lib
 make_rc=$?
 
 [ "$make_rc" -ne 0 ] && { echo "Make failed with return code: $make_rc"; exit $make_rc; }
@@ -110,6 +110,7 @@ for lib in $libs
 do
  echo "Installing $lib"
  cp "$lib" "$install/lib" || { rc=$?; echo "Failed copying $lib: return code = $rc"; exit $rc; }
+ ls -lt "${install}/lib/${lib}"
 done
 
 ### EOF ###
