@@ -2,31 +2,11 @@
 #
 # File:         install.sh
 # Created:      200517
-# Description:  description for install.sh
+#
+# Master install script for GPAW.
 #
 
 ### FUNCTIONS ###
-
-
-# libxc files:
-#local_install/bin/xc-info.exe
-#local_install/include/libxc_funcs_m.mod
-#local_install/include/xc.h
-#local_install/include/xc_config.h
-#local_install/include/xc_f03_lib_m.mod
-#local_install/include/xc_f90_lib_m.mod
-#local_install/include/xc_f90_types_m.mod
-#local_install/include/xc_funcs.h
-#local_install/include/xc_unconfig.h
-#local_install/include/xc_version.h
-#local_install/lib/libxc.a
-#local_install/lib/libxc.la
-#local_install/lib/libxcf03.a
-#local_install/lib/libxcf03.la
-#local_install/lib/libxcf90.a
-#local_install/lib/libxcf90.la
-#local_install/lib/pkgconfig
-#local_install/lib/pkgconfig/libxc.pc
 
 libxc_install()
 {
@@ -66,14 +46,12 @@ blas_test()
  return 0
 }
 
-
-
 #
 #
 lapack_test()
 {
  typeset libs="liblapack.a librefblas.a libtmglib.a"
- typeset _l="$GPAW/local_install/lib"
+ typeset _l="$GPAW/software/lib"
  typeset fp=""
  typeset uninstalled=0
 

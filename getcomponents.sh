@@ -19,7 +19,6 @@ checkDownloaded()
 {
  typeset list=$(fileMap | awk ' { print $2 } ' )
 
-
  for url in $list
  do
   bn=$(basename $url)
@@ -44,13 +43,13 @@ uncompressAll()
   {
    mkdir -p "${xname}"
    tar xzf "${burl}" -C "${xname}"
-  } 
+  }
 
   [ ${burl} != ${burl%.bz2} ] &&
   {
    mkdir -p "${xname}"
    tar xjf "${burl}" -C "${xname}"
-  } 
+  }
 
   badPath=$(ls -1d $xname/*)
 

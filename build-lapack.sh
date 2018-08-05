@@ -1,15 +1,12 @@
 #!/bin/bash
 #
-# File:         build-lapack.sh
-# Created:      
-# Description:  lapack build
+# lapack build
 #
 
 ### FUNCTIONS ###
 
 #
 # custom basename
-
 _basename()
 {
  typeset root="$1"
@@ -23,11 +20,11 @@ _basename()
 }
 '
 }
- 
+
 _bulk_ln()
 {
- typeset root="$1" 
- typeset target="$2" 
+ typeset root="$1"
+ typeset target="$2"
 
  awk -vroot=$root -vtarget=$target '
 BEGIN { cnt = 0; }
@@ -39,7 +36,7 @@ BEGIN { cnt = 0; }
   {
     print "ln -sf " $0 " "target "/" base " &&";
     cnt = cnt + 1;
-    if (cnt % 100 == 0) { print "echo success for " cnt; }
+#    if (cnt % 100 == 0) { print "echo success for " cnt; }
   }
 }
 END { print " echo Success: for " cnt " links" ; }
@@ -49,7 +46,6 @@ END { print " echo Success: for " cnt " links" ; }
 #
 # debug / more informational echo
 #
-
 decho()
 {
   echo "lapack: $*"
@@ -66,7 +62,6 @@ installtmp="${projectdir}/software"
 ### MAIN ###
 
 # Sanity checks
-
 [ ! -d "${projectdir}" ] && { echo "Project directory invalid"; exit 1; }
 [ ! -d "${src}" ] && { echo "Source directory invalid"; exit 1; }
 [ ! -d "${target}" ] && { mkdir -p "${target}" || exit 1; }

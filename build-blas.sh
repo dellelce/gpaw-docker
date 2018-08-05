@@ -1,15 +1,12 @@
 #!/bin/bash
 #
-# File:         build-blas.sh
 # Created:      220215
-# Description:  build blas
 #
 
 ### FUNCTIONS ###
 
 #
 # custom basename
-
 _basename()
 {
  typeset root="$1"
@@ -23,12 +20,11 @@ _basename()
  }
 '
 }
- 
 
 _bulk_ln()
 {
- typeset root="$1" 
- typeset target="$2" 
+ typeset root="$1"
+ typeset target="$2"
 
  awk -vroot=$root -vtarget=$target \
 '
@@ -58,7 +54,7 @@ id="blas"
 projectdir="${GPAW}"
 src="${projectdir}/source/${id}"
 target="${projectdir}/build/${id}"
-installtmp="${projectdir}/software"
+install="${projectdir}/software"
 
 ### MAIN ###
 
@@ -94,9 +90,12 @@ rc=$?
  liba="blas_LINUX.a"
  libso="libblas.so"
 
+ [ ! -f "$liba" ] && { echo "library file does not exist: $liba"; exit 1; }
+ [ ! -f "$libso" ] && { echo "shared library file does not exist: $liba"; exit 1; }
+
  # blas Makefile does not have an install
 
- cp $liba "$install/lib" || exit $?
+ cp $liba "$install/lib" || { echo "Failed copying $liba"; exit $?; }
  cp $libso "$install/lib" || exit $?
  ln -sf "$install/lib/${liba}" "$install/lib/blas.a" || exit $?
  ln -sf "$install/lib/${liba}" "$install/lib/libblas.a" || exit $?

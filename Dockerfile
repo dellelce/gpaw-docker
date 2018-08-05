@@ -2,11 +2,11 @@ FROM python:3.7-alpine as build
 
 MAINTAINER Antonio Dell'Elce
 
-ARG BUILDDIR
-ENV BUILDDIR  /app/gpaw/build/
-
 ARG INSTALLDIR
-ENV INSTALLDIR  /app/gpaw/
+ENV INSTALLDIR  /app/gpaw
+
+ARG BUILDDIR
+ENV BUILDDIR  ${INSTALLDIR}/build
 
 # gcc             most of the source needs gcc
 # bash            busybox does not support some needed features of bash like "typeset"
@@ -23,9 +23,12 @@ ENV PACKAGES gcc ncurses ncurses-libs autoconf automake wget perl file xz make \
 WORKDIR $BUILDDIR
 COPY *.sh $BUILDDIR
 
+# these three directories are prepared by "getcomponents.sh"
 COPY blas $INSTALLDIR/source/blas
 COPY lapack $INSTALLDIR/source/lapack
 COPY libxc $INSTALLDIR/source/libxc
+
+COPY requirements.txt $INSTALLDIR
 
 RUN  apk add --no-cache  $PACKAGES &&  \
      bash ${BUILDDIR}/docker.sh $INSTALLDIR

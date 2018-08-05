@@ -44,12 +44,11 @@ test_dir()
 
 ### MAIN ###
 
-set -x
 prefix="$1"
-mkdir -p $prefix && ./install.sh $prefix
+mkdir -p $prefix && bash -x ./install.sh $prefix
 rc=$?
 
-[ "$rc" -eq 0 ] && echo "mkit failed rc: $rc"
+[ "$rc" -eq 0 ] && echo "install.sh failed rc: $rc"
 
 exit $rc
 
