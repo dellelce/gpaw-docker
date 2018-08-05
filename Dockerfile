@@ -16,9 +16,12 @@ ENV BUILDDIR  ${INSTALLDIR}/build
 # xz              xz is the "best"
 # libc-dev        headers
 # linux-headers   more headers
+
+ENV MATPLOTLIB  freetype-dev libpng-dev
+
 ARG PACKAGES
 ENV PACKAGES gcc ncurses ncurses-libs autoconf automake wget perl file xz make \
-             bash gfortran libc-dev linux-headers g++
+             bash gfortran libc-dev linux-headers g++ ${MATPLOTLIB}
 
 WORKDIR $BUILDDIR
 COPY *.sh $BUILDDIR/
