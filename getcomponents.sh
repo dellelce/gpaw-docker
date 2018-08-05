@@ -15,7 +15,8 @@ libxc      https://bitbucket.org/antoniodellelce/libxc/get/libxc-3.0.0.tar.bz2
 EOF
 }
 
-checkDownloaded()
+# download "components"
+downloadComponents()
 {
  typeset list=$(fileMap | awk ' { print $2 } ' )
 
@@ -23,13 +24,13 @@ checkDownloaded()
  do
   bn=$(basename $url)
 
-  #echo "$bn" "$url"
   [ ! -f "$bn" ] && { wget -q $url; }
  done
 
  return 0 # make it explicit
 }
 
+# uncompress all components
 uncompressAll()
 {
  fileMap | while read name url
@@ -61,6 +62,7 @@ uncompressAll()
 
 ### MAIN ###
 
-checkDownloaded && uncompressAll
+downloadComponents && uncompressAll
+exit $?
 
 ### EOF ###
