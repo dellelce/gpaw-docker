@@ -107,11 +107,13 @@ lapack_test()
  echo
 
 # work-around to non working requirements.txt
+ export LAPACK="$GPAW/software/lib"
+ export LAPACK_SRC="$GPAW/source/lapack"
 
- pip install -U numpy   &&
- pip install -U ase     &&
  CFLAGS="-I${workDir}/include"  \
  LDFLAGS="-L${workDir}/lib"     \
+ pip install -U numpy   &&
+ pip install -U ase     &&
  pip install -U gpaw	&&
  pip install -U setuptools_scm	&&
  pip install -U -r $GPAW/requirements.txt
