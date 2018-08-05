@@ -21,7 +21,7 @@ ENV PACKAGES gcc ncurses ncurses-libs autoconf automake wget perl file xz make \
              bash gfortran libc-dev linux-headers g++
 
 WORKDIR $BUILDDIR
-COPY *.sh $BUILDDIR
+COPY *.sh $BUILDDIR/
 
 # these three directories are prepared by "getcomponents.sh"
 COPY blas $INSTALLDIR/source/blas
