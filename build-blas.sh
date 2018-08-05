@@ -43,7 +43,7 @@ _bulk_ln()
  }
  END \
  {
-  print " echo Complete: for " cnt " links";
+  print " echo Created: for " cnt " links";
  }
 '
 }

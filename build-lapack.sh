@@ -39,7 +39,7 @@ BEGIN { cnt = 0; }
 #    if (cnt % 100 == 0) { print "echo success for " cnt; }
   }
 }
-END { print " echo Success: for " cnt " links" ; }
+END { print " echo Created: for " cnt " links" ; }
 '
 }
 
