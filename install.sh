@@ -111,6 +111,7 @@ lapack_test()
  export BLAS="$GPAW/software/lib"
  export LAPACK_SRC="$GPAW/source/lapack"
 
+ export CFLAGS="-fPIC" # trying to force everything to be "shared" :) am I too dirty?
  # unneeded
  #CFLAGS="-I${workDir}/include"  \
  #LDFLAGS="-L${workDir}/lib"     \
