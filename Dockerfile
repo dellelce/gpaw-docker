@@ -18,10 +18,12 @@ ENV BUILDDIR  ${INSTALLDIR}/build
 # linux-headers   more headers
 
 ENV MATPLOTLIB  freetype-dev libpng-dev
+ENV AUTOTOOLS   autoconf automake
+ENV COMPILERS   gcc g++ gfortran
 
 ARG PACKAGES
-ENV PACKAGES gcc ncurses ncurses-libs autoconf automake wget perl file xz make \
-             bash gfortran libc-dev linux-headers g++ ${MATPLOTLIB}
+ENV PACKAGES ncurses ncurses-libs wget perl file xz make ${COMPILERS} \
+             bash libc-dev linux-headers ${MATPLOTLIB} ${AUTOTOOLS}
 
 WORKDIR $BUILDDIR
 COPY *.sh $BUILDDIR/
