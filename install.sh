@@ -108,8 +108,8 @@ lapack_test()
 
 # work-around to non working requirements.txt
  #export LAPACK="$GPAW/software/lib"
+ #export LAPACK_SRC="$GPAW/source/lapack"
  export BLAS="$GPAW/software/lib"
- export LAPACK_SRC="$GPAW/source/lapack"
 
  export CFLAGS="-fPIC" # trying to force everything to be "shared" :) am I too dirty?
  # unneeded
