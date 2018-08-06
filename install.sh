@@ -108,7 +108,7 @@ lapack_test()
 
 # work-around to non working requirements.txt
  export LAPACK="$GPAW/software/lib"
- export OPENBLAS="$GPAW/software/lib"
+ export BLAS="$GPAW/software/lib"
  export LAPACK_SRC="$GPAW/source/lapack"
 
  CFLAGS="-I${workDir}/include"  \

@@ -8,11 +8,11 @@
 ### ENV ###
 
 id="libxc"
+buildid="${id}.${RANDOM}"
 projectdir="${GPAW}"
 src="${projectdir}/source/${id}"
 target="${projectdir}/build/${id}"
 install="${projectdir}/software"
-build_id="libxc.${RANDOM}"
 
 ### MAIN ###
 
@@ -27,7 +27,7 @@ build_id="libxc.${RANDOM}"
 cd ${target} || { echo "Failed changing directory to target: ${target}"; exit 1; }
 
 # Step 1: Configure
-log="configure.${build_id}.log"
+log="configure.${buildid}.log"
 ${src}/configure --enable-shared --prefix="${install}" > ${log} 2>&1
 rc="$?"
 [ "$rc" -ne 0 ] &&
@@ -39,7 +39,7 @@ rc="$?"
 }
 
 # Step 2: Make
-log="make.${build_id}.log"
+log="make.${buildid}.log"
 make > ${log} 2>&1
 rc="$?"
 [ "$rc" -ne 0 ] &&
@@ -51,7 +51,7 @@ rc="$?"
 }
 
 # Step 3: Make Install
-log="makeinstall.${build_id}.log"
+log="makeinstall.${buildid}.log"
 make install > ${log} 2>&1
 rc="$?"
 [ "$rc" -ne 0 ] &&
@@ -61,6 +61,9 @@ rc="$?"
  echo "Make install step failed with return code ${rc}"
  exit ${rc}
 }
+
+# extra check
+ls -lt $install/lib
 
 exit 0
 

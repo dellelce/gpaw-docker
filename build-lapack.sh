@@ -54,10 +54,11 @@ decho()
 ### ENV ###
 
 id="lapack"
+buildid="${id}.${RANDOM}"
 projectdir="${GPAW}"
 src="${projectdir}/source/${id}"
 target="${projectdir}/build/${id}"
-installtmp="${projectdir}/software"
+install="${projectdir}/software"
 
 ### MAIN ###
 
@@ -123,7 +124,7 @@ log="/tmp/lapackinstall.${buildid}.log"
 make lapack_install  > ${log} 2>&1
 rc_lapackinstall=$?
 
-[ "$rc_lapack" -ne 0 ] &&
+[ "$rc_lapackinstall" -ne 0 ] &&
 {
  cat "${log}"
  rm "${log}"

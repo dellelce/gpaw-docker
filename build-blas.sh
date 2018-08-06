@@ -51,11 +51,11 @@ _bulk_ln()
 ### ENV ###
 
 id="blas"
+buildid="${id}.${RANDOM}"
 projectdir="${GPAW}"
 src="${projectdir}/source/${id}"
 target="${projectdir}/build/${id}"
 install="${projectdir}/software"
-build_id="blas.${RANDOM}"
 
 ### MAIN ###
 
@@ -84,7 +84,7 @@ rc=$?
 echo "Starting at :"$(date)
 
 # Make it
-log="/tmp/make.${build_id}.log"
+log="/tmp/make.${buildid}.log"
 make > ${log} 2>&1
 rc=$?
 [ $rc -eq 0 ] &&
@@ -96,11 +96,12 @@ rc=$?
  [ ! -f "$libso" ] && { echo "shared library file does not exist: $liba"; exit 1; }
 
  # blas Makefile does not have an install
+ mkdir "$install/lib" # make sure $install/lib exists!
 
- cp $liba "$install/lib" || { echo "Failed copying $liba"; exit $?; }
- cp $libso "$install/lib" || { echo "Failed copying ${libso}"; exit $?; }
- ln -sf "$install/lib/${liba}" "$install/lib/blas.a" || exit $?
- ln -sf "$install/lib/${liba}" "$install/lib/libblas.a" || exit $?
+ cp ${liba} "${install}/lib" || { echo "Failed copying ${liba}"; exit $?; }
+ cp ${libso} "${install}/lib" || { echo "Failed copying ${libso}"; exit $?; }
+ ln -sf "${install}/lib/${liba}" "${install}/lib/blas.a" || exit $?
+ ln -sf "${install}/lib/${liba}" "${install}/lib/libblas.a" || exit $?
 } ||
 {
  # show log only on failure!
