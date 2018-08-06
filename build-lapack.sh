@@ -67,7 +67,7 @@ installtmp="${projectdir}/software"
 [ ! -d "${target}" ] && { mkdir -p "${target}" || exit 1; }
 
 # Actual main
-# Make links for files and re-create directories in build directory
+# make links for files and re-create directories in build directory
 
 allDirs=$(find $src  -type d | _basename ${src} )
 
@@ -88,17 +88,49 @@ pwd
 
 ln -sf make.inc.example make.inc
 
-[ -f "Makefile.orig" ] && ls -lt Makefile.orig
-ls -lt Makefile
+[ -f "makefile.orig" ] && ls -lt makefile.orig
+ls -lt makefile
 
 echo "Starting at :"$(date)
 
-make blaslib
-rc_blasslib=$?
-make lapack_install lib
-make_rc=$?
+log="/tmp/blaslib.${buildid}.log"
+make blaslib > ${log} 2>&1
+rc_blaslib=$?
 
-[ "$make_rc" -ne 0 ] && { echo "Make failed with return code: $make_rc"; exit $make_rc; }
+[ "$rc_blaslib" -ne 0 ] &&
+{
+ cat "${log}"
+ rm "${log}"
+ echo
+ echo "make blas lib failed with return code: $make_rc"
+ exit $make_rc
+}
+
+log="/tmp/lib.${buildid}.log"
+make lib  > ${log} 2>&1
+rc_lib=$?
+
+[ "$rc_lib" -ne 0 ] &&
+{
+ cat "${log}"
+ rm "${log}"
+ echo
+ echo "make lib failed with return code: $make_rc"
+ exit $make_rc
+}
+
+log="/tmp/lapackinstall.${buildid}.log"
+make lapack_install  > ${log} 2>&1
+rc_lapackinstall=$?
+
+[ "$rc_lapack" -ne 0 ] &&
+{
+ cat "${log}"
+ rm "${log}"
+ echo
+ echo "make lapack_install failed with return code: $make_rc"
+ exit $make_rc
+}
 
 libs="./liblapack.a
 ./librefblas.a
