@@ -111,9 +111,8 @@ lapack_test()
  export LAPACK_SRC="$GPAW/source/lapack"
  export BLAS="$GPAW/software/lib"
 
- # unneeded
- #CFLAGS="-I${workDir}/include"  \
- #LDFLAGS="-L${workDir}/lib"     \
+ LDFLAGS="-L${workDir}/lib"     \
+ CFLAGS="-I${workDir}/include"  \
  pip install -U numpy   &&
  pip install -U ase     &&
  pip install -U setuptools_scm	&&
