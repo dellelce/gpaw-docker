@@ -111,11 +111,16 @@ lapack_test()
  export LAPACK_SRC="$GPAW/source/lapack"
  export BLAS="$GPAW/software/lib"
 
- LDFLAGS="-L${workDir}/lib"     \
+ #defining LDFLAGS breaks numpy build
+ # module: numpy/linalg/lapack_lite.cpython-37m-x86_64-linux-gnu.so
+ # error: undefined reference to main
+ #LDFLAGS="-L${workDir}/lib"     \
+
+ # CGLAGS with include directory is needed by "GPAW" for libxc headers
  CFLAGS="-I${workDir}/include"  \
  pip install -U numpy   &&
  pip install -U ase     &&
- pip install -U setuptools_scm	&&
+ pip install -U setuptools_sc
  pip install -U -r $GPAW/requirements.txt
 
 ### EOF ###
