@@ -1,6 +1,6 @@
 ase
 numpy
-gpaw
+https://github.com/dellelce/gpaw/archive/1.4.0-instantfix.tar.gz
 celery
 spglib
 setproctitle
