@@ -38,7 +38,7 @@ RUN  apk add --no-cache  $PACKAGES &&  \
 # Second Stage
 FROM dellelce/mkit:latest AS final
 
-ENV GPAWDIR   /app/gpaw
+ENV GPAWDIR   /app/gpaw/software
 ENV HTTPDDIR  /app/httpd
 
 RUN mkdir -p "${GPAWDIR}"
