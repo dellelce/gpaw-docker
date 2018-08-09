@@ -4,6 +4,9 @@ notifications:
 sudo: required
 services:
  - docker
-script: ./getcomponents.sh && docker build .
-addons:
-  ssh_known_hosts: antouk.bitbucket.org
+env:
+ - tag="dellelce/gpaw"
+script: ./getcomponents.sh && docker build -t "${tag}" .
+after_success:
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+ - docker push "${target}"
