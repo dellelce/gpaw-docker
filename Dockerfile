@@ -2,10 +2,7 @@ FROM dellelce/mkit:latest as build
 
 MAINTAINER Antonio Dell'Elce
 
-ARG INSTALLDIR
 ENV INSTALLDIR  /app/gpaw
-
-ARG BUILDDIR
 ENV BUILDDIR  ${INSTALLDIR}/build
 
 # gcc             most of the source needs gcc
@@ -38,12 +35,12 @@ COPY requirements.txt $INSTALLDIR
 RUN  apk add --no-cache  $PACKAGES &&  \
      bash ${BUILDDIR}/docker.sh $INSTALLDIR
 
-# Second Stage -- second stage comes later
+# Second Stage
+FROM dellelce/mkit:latest AS final
 
-#FROM alpine:latest AS final
+ENV GPAWDIR   /app/gpaw
+ENV HTTPDDIR  /app/httpd
 
-#RUN mkdir -p ${INSTALLDIR} && \
-#    apk add --no-cache libgcc ncurses-libs
-#
-#WORKDIR ${INSTALLDIR}
-##COPY --from=build ${INSTALLDIR} .
+RUN mkdir -p "${GPAWDIR}"
+
+COPY --from=build ${GPAWDIR} ${GPAWDIR}
