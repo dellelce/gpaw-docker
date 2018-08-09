@@ -1,4 +1,4 @@
-FROM python:3.7-alpine as build
+FROM dellelce/mkit:latest as build
 
 MAINTAINER Antonio Dell'Elce
 

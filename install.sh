@@ -91,9 +91,14 @@ lapack_test()
  export virtualenv="$GPAW/venv"
  export activate="$virtualenv/bin/activate"
 
+ for p in /app/httpd/bin/python3 $GPAW/software/bin/python3 /usr/local/bin/python3 /usr/bin/python3
+ do
+  [ -e "$p" ] && { python="$p"; break; }
+ done
+
 ### MAIN ###
 
- python3 -m venv $virtualenv || { echo "Python virtualenv creation failed!"; exit 1; }
+ $python -m venv $virtualenv || { echo "Python virtualenv creation failed!"; exit 1; }
  [ ! -f "$activate" ] && { echo "virtualenv activate does not exist!"; exit 1; }
 
  . "$activate"
