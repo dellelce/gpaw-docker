@@ -8,4 +8,4 @@ env:
  - tag="dellelce/gpaw"
 script: ./getcomponents.sh && docker build -t "${tag}" .
 after_success:
- - docker_push.sh "${tag}"
+ - pwd && ls -lt && docker_push.sh "${tag}"
