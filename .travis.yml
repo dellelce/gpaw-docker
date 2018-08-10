@@ -8,5 +8,5 @@ env:
  - tag="dellelce/gpaw"
 script: ./getcomponents.sh && docker build -t "${tag}" .
 after_success:
- - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
- - docker push "${target}"
+ - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+ - docker push "${tag}"
