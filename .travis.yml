@@ -6,6 +6,4 @@ services:
  - docker
 env:
  - tag="dellelce/gpaw"
-script: ./getcomponents.sh && docker build -t "${tag}" .
-after_success:
- - ./docker-push.sh "${tag}"
+script: ./getcomponents.sh && docker build -t "${tag}" . && ./docker-push.sh "${tag}"
