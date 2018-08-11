@@ -74,8 +74,9 @@ lapack_test()
 
 ### ENV ###
 
- export GPAW="$1"
- [ -z "$GPAW" ] && { echo "usage: $0 instal path";  exit 1; }
+ export GPAW="${GPAW:-$1}"
+ [ -z "$GPAW" ] && { echo "usage: $0 install path";  exit 1; }
+ [ ! -d "$GPAW" ] && { echo "Creating install path $GPAW"; mkdir $GPAW; [ $? -ne 0 ] && exit 1; } 
 
  # this is temporary... for real!
  mkdir -p $GPAW/sh
