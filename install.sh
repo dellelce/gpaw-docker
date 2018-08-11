@@ -88,10 +88,11 @@ lapack_test()
  mkdir -p "$workDir/include"
 
  export PATH="$workDir/bin:$PATH"
- export virtualenv="$GPAW/venv"
+ export virtualenv="${GPAWENV:-$GPAW/software/venv}"
  export activate="$virtualenv/bin/activate"
 
- for p in /app/httpd/bin/python3 $GPAW/software/bin/python3 /usr/local/bin/python3 /usr/bin/python3
+ for p in /app/httpd/bin/python3 $GPAW/software/bin/python3 \
+          /usr/local/bin/python3 /usr/bin/python3
  do
   [ -e "$p" ] && { python="$p"; break; }
  done
