@@ -6,7 +6,6 @@ ENV GPAW         /app/gpaw
 ENV BUILDDIR     ${GPAW}/build
 ENV GPAWINSTALL  ${GPAW}/software
 
-
 # Packages description here
 # MATPLOTLIB:  needed by ase
 ENV MATPLOTLIB  freetype-dev libpng-dev
