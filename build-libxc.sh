@@ -17,9 +17,8 @@ install="${projectdir}/software"
 ### MAIN ###
 
 # Sanity checks
-
-[ ! -d "${projectdir}" ] && { echo "Project directory invalid"; exit 1; }
-[ ! -d "${src}" ] && { echo "Source directory invalid"; exit 1; }
+[ ! -d "${projectdir}" ] && { echo "Project directory invalid: ${projectdir}"; exit 1; }
+[ ! -d "${src}" ] && { echo "Source directory invalid: ${src}"; exit 1; }
 [ ! -d "${target}" ] && { mkdir -p "${target}" || exit 1; }
 
 # Actual main
