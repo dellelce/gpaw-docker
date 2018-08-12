@@ -23,10 +23,10 @@ COPY blas   $GPAW/source/blas
 COPY lapack $GPAW/source/lapack
 COPY libxc  $GPAW/source/libxc
 
-COPY requirements.txt $INSTALLDIR
+COPY requirements.txt $GPAW
 
 RUN  apk add --no-cache  $PACKAGES &&  \
-     bash ${BUILDDIR}/docker.sh $INSTALLDIR
+     bash ${BUILDDIR}/docker.sh $GPAW
 
 # Second Stage
 FROM dellelce/mkit:latest AS final
