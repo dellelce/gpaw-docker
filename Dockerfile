@@ -44,4 +44,4 @@ RUN  apk add --no-cache libgfortran libstdc++
 # ain't this dirty?
 ENV LD_PRELOAD /usr/lib/libgfortran.so.3
 
-COPY --from=build ${GPAWDIR} ${GPAWDIR}
+COPY --from=build ${GPAW}/software ${GPAW}/software
