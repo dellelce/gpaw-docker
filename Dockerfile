@@ -31,7 +31,11 @@ RUN  apk add --no-cache  $PACKAGES &&  \
 # Second Stage
 FROM dellelce/mkit:latest AS final
 
-ENV GPAW      /app/gpaw
+ENV GPAW            /app/gpaw
+ENV GPAW_SETUP_PATH ${GPAW}/datasets
+
+VOLUME ${GPAW_SETUP_PATH}
+VOLUME ${GPAW}/executions
 
 RUN mkdir -p "${GPAW}"/software
 
