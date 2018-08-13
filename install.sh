@@ -127,7 +127,7 @@ lapack_test()
  pip install -U ase     &&
  pip install -U setuptools_scm      # setuptools_scm needed by "elastic"
 
- LDFLAGS="-L${workDir}/lib"     \
+ LDFLAGS="-L${workDir}/lib -Wl,-rpath=${workDir}/lib -Wl,-rpath=/usr/lib"     \
  CFLAGS="-I${workDir}/include"  \
  pip install -U -r $GPAW/requirements.txt
 
