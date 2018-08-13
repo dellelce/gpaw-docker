@@ -31,11 +31,13 @@ RUN  apk add --no-cache  $PACKAGES &&  \
 # Second Stage
 FROM dellelce/mkit:latest AS final
 
-ENV GPAWDIR   /app/gpaw/software
-ENV HTTPDDIR  /app/httpd
+ENV GPAW      /app/gpaw
 
-RUN mkdir -p "${GPAWDIR}"
+RUN mkdir -p "${GPAW}"/software
 
 RUN  apk add --no-cache libgfortran libstdc++
+
+# ain't this dirty?
+ENV LD_PRELOAD /usr/lib/libgfortran.so.3
 
 COPY --from=build ${GPAWDIR} ${GPAWDIR}
