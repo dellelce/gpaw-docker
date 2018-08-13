@@ -36,4 +36,6 @@ ENV HTTPDDIR  /app/httpd
 
 RUN mkdir -p "${GPAWDIR}"
 
+RUN  apk add --no-cache libgfortran libstdc++
+
 COPY --from=build ${GPAWDIR} ${GPAWDIR}
