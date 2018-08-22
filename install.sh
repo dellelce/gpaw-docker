@@ -95,8 +95,8 @@ lapack_test()
  # this can be improved... another day...
  pythons="/app/httpd/bin/python3 $GPAW/software/bin/python3 \
           /usr/local/bin/python3 /usr/bin/python3"
- [ -d "$prefix" ] && expot pythons="$prefix/bin/python3 $pythons"
- [ -d "/app/uwsgi" ] && expot pythons="/app/uwsgi/bin/python3 $pythons"
+ [ -d "$prefix" ] && export pythons="$prefix/bin/python3 $pythons"
+ [ -d "/app/uwsgi" ] && export pythons="/app/uwsgi/bin/python3 $pythons"
 
  for p in $pythons
  do
