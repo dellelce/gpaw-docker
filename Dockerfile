@@ -1,4 +1,6 @@
-FROM dellelce/mkit:latest as build
+
+ARG BASE=dellelce/mkit
+FROM ${BASE}:latest as build
 
 LABEL maintainer="Antonio Dell'Elce"
 
@@ -29,7 +31,8 @@ RUN  apk add --no-cache  $PACKAGES &&  \
      bash ${BUILDDIR}/docker.sh $GPAW
 
 # Second Stage
-FROM dellelce/mkit:latest AS final
+ARG BASE=dellelce/mkit
+FROM ${BASE}:latest AS final
 
 ENV GPAW            /app/gpaw
 ENV GPAW_SETUP_PATH ${GPAW}/datasets
