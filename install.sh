@@ -92,8 +92,13 @@ lapack_test()
  export virtualenv="${GPAWENV:-$GPAW/software/venv}"
  export activate="$virtualenv/bin/activate"
 
- for p in /app/httpd/bin/python3 $GPAW/software/bin/python3 \
-          /usr/local/bin/python3 /usr/bin/python3
+ # this can be improved... another day...
+ pythons="/app/httpd/bin/python3 $GPAW/software/bin/python3 \
+          /usr/local/bin/python3 /usr/bin/python3"
+ [ -d "$prefix" ] && expot pythons="$prefix/bin/python3 $pythons"
+ [ -d "/app/uwsgi" ] && expot pythons="/app/uwsgi/bin/python3 $pythons"
+
+ for p in $pythons
  do
   [ -e "$p" ] && { python="$p"; break; }
  done
