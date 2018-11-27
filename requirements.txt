@@ -1,4 +1,4 @@
-https://github.com/dellelce/gpaw/archive/1.4.0-instantfix.tar.gz
+https://github.com/dellelce/gpaw/archive/1.4.0-131018.tar.gz
 celery
 spglib
 setproctitle
