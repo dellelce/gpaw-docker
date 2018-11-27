@@ -49,6 +49,6 @@ ENV LD_PRELOAD /usr/lib/libgfortran.so.3
 
 # virtualenv, hmmm virtualenv for root? Mumble mumble...
 ENV ENV   /root/.profile
-RUN echo ". ${GPAW}/software/venv" >> /root/.profile
+RUN echo ". ${GPAW}/software/venv/bin/activate" >> /root/.profile
 
 COPY --from=build ${GPAW}/software ${GPAW}/software
