@@ -1,4 +1,4 @@
-https://github.com/dellelce/gpaw/archive/1.4.0-131018.tar.gz
+gpaw
 celery
 spglib
 setproctitle
