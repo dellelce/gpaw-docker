@@ -89,7 +89,7 @@ lapack_test()
  mkdir -p "$workDir/include"
 
  export PATH="$workDir/bin:$PATH"
- export virtualenv="${GPAWENV:-$GPAW/software/venv}"
+ export virtualenv="${GPAWENV:-$GPAW/gpawenv}"
  export activate="$virtualenv/bin/activate"
 
  # this can be improved... another day...

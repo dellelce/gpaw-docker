@@ -6,7 +6,7 @@ LABEL maintainer="Antonio Dell'Elce"
 
 ENV GPAW         /app/gpaw
 ENV BUILDDIR     ${GPAW}/build
-ENV GPAWINSTALL  ${GPAW}/software
+ENV GPAWENV      ${GPAW}/gpawenv
 
 # Packages description here
 # MATPLOTLIB:  needed by ase
@@ -35,12 +35,12 @@ ARG BASE=dellelce/mkit
 FROM ${BASE}:latest AS final
 
 ENV GPAW            /app/gpaw
+ENV GPAWENV         ${GPAW}/gpawenv
 ENV GPAW_SETUP_PATH ${GPAW}/datasets
+ENV PATH            ${GPAW}/bin:${GPAWENV}/bin:${PATH}
 
 VOLUME ${GPAW_SETUP_PATH}
 VOLUME ${GPAW}/executions
-
-RUN mkdir -p "${GPAW}"/software
 
 RUN  apk add --no-cache libgfortran libstdc++
 
