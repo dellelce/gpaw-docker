@@ -26,14 +26,14 @@
  docker_hub || exit $?
 
  # we expect an image without a version at this point
- py_version=$(docker run -it --rm "$image" python -V | awk ' { print $2 } ')
- gpaw_version=$(docker run -it --rm "$image" gpaw --version | awk -F- ' {print $2 } ')
+ py_version=$(docker run -it --rm "$image" python -V | awk ' { printf $2 } ' | sed -e 's///g')
+ gpaw_version=$(docker run -it --rm "$image" gpaw --version | awk -F- ' {printf "%s", $2 } ' | sed -e 's///g')
 
  # build image list
- images="$image $image-${gpaw_version} $image-${gpaw_version}-py${py_version}"
+ images="$image $image:${gpaw_version} $image:${gpaw_version}-py${py_version}"
 
- docker tag "$image" "$image-${gpaw_version}"
- docker tag "$image" "$image-${gpaw_version}-py${py_version}"
+ docker tag "$image" "$image:${gpaw_version}"
+ docker tag "$image" "$image:${gpaw_version}-py${py_version}"
 
  for image in $images
  do
