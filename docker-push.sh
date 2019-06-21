@@ -27,7 +27,7 @@
 
  # we expect an image without a version at this point
  py_version=$(docker run -it --rm "$image" python -V | awk ' { print $2 } ')
- gpaw_version=$(docker run -it --rm "$image" gpaw --version | awk -F- ' {print $2 } '(
+ gpaw_version=$(docker run -it --rm "$image" gpaw --version | awk -F- ' {print $2 } ')
 
  # build image list
  images="$image $image-${gpaw_version} $image-${gpaw_version}-py${py_version}"
