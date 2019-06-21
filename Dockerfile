@@ -51,5 +51,7 @@ ENV LD_PRELOAD /usr/lib/libgfortran.so.3
 ENV ENV   /root/.profile
 RUN echo ". ${GPAWENV}/bin/activate" >> /root/.profile
 
-COPY --from=build ${GPAW}/software ${GPAW}/software  # GPAW dependencies (libxc, blast, etc.)
-COPY --from=build ${GPAWENV} ${GPAWENV}              # GPAW virtualenv
+# GPAW dependencies (libxc, blast, etc.)
+COPY --from=build ${GPAW}/software ${GPAW}/software
+# GPAW virtualenv
+COPY --from=build ${GPAWENV} ${GPAWENV}
