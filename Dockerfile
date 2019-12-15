@@ -1,3 +1,7 @@
+#
+# GPAW Density Functional Theory Dockerfile
+#
+# default base image "dellelce/mkit" has: Python (Latest) + Apache httpd (Latest)
 
 ARG BASE=dellelce/mkit
 FROM ${BASE}:latest as build
@@ -44,10 +48,9 @@ VOLUME ${GPAW}/executions
 
 RUN  apk add --no-cache libgfortran libstdc++
 
-# ain't this dirty?
+# Pre-load the gfortran shared library
 ENV LD_PRELOAD /usr/lib/libgfortran.so.3
 
-# virtualenv, hmmm virtualenv for root? Mumble mumble...
 ENV ENV   /root/.profile
 RUN echo ". ${GPAWENV}/bin/activate" >> /root/.profile
 
