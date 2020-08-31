@@ -14,7 +14,7 @@ ENV GPAWENV      ${GPAW}/gpawenv
 
 # Packages description here
 # MATPLOTLIB:  needed by ase
-ENV MATPLOTLIB  freetype-dev libpng-dev
+ENV MATPLOTLIB  freetype-dev libpng-dev jpeg-dev
 ENV AUTOTOOLS   autoconf automake perl
 ENV COMPILERS   gcc g++ gfortran make
 ENV COREDEV     libc-dev linux-headers make
