@@ -128,9 +128,10 @@ lapack_test()
  # module: numpy/linalg/lapack_lite.cpython-37m-x86_64-linux-gnu.so
  # error: undefined reference to main
  # CFLAGS with include directory is needed by "GPAW" for libxc headers
+ pip install -U wheel   &&
  pip install -U numpy   &&
  pip install -U ase     &&
- pip install -U setuptools_scm      # setuptools_scm needed by "elastic"
+ pip install -U setuptools-scm      # setuptools_scm needed by "elastic"
 
  LDFLAGS="-L${workDir}/lib -Wl,-rpath=${workDir}/lib -Wl,-rpath=/usr/lib"     \
  CFLAGS="-I${workDir}/include"  \
