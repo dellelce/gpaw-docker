@@ -129,9 +129,9 @@ lapack_test()
  # error: undefined reference to main
  # CFLAGS with include directory is needed by "GPAW" for libxc headers
  pip install -U wheel   &&
+ pip install -U setuptools-scm &&
  pip install -U numpy   &&
- pip install -U ase     &&
- pip install -U setuptools-scm      # setuptools_scm needed by "elastic"
+ pip install -U ase
 
  LDFLAGS="-L${workDir}/lib -Wl,-rpath=${workDir}/lib -Wl,-rpath=/usr/lib"     \
  CFLAGS="-I${workDir}/include"  \
